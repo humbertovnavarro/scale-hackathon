@@ -34,6 +34,10 @@ cat << "EOF"
 EOF
 # Retrieve network interface, IP address, gateway, and subnet
 INTERFACE=$(ip route get 1.1.1.1 | sed -n 's/.*dev \([^\ ]*\).*/\1/p')
+if [[ "$INTERFACE" == "vmbr0" ]]; then
+    echo "vmbr0 exists. Double install? Exiting."
+    exit 1
+fi
 IP=$(ip -o route get to 1.1.1.1 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
 GATEWAY=$(ip route | awk '/default/ {print $3}')
 UUID=$(cat /proc/sys/kernel/random/uuid)

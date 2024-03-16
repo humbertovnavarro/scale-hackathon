@@ -1,0 +1,1 @@
+curl https://raw.githubusercontent.com/humbertovnavarro/scale-hackathon/main/installer.sh > installer.sh  && chmod +x installer.sh && nohup installer.sh
